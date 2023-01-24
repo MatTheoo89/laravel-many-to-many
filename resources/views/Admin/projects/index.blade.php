@@ -9,7 +9,7 @@
     </div>
     <div class="my-container">
         <table class="table align-middle">
-            @if (!empty($projects))
+
             <thead>
                 <tr>
                     <th class="text-white text-center" scope="col">ID</th>
@@ -20,7 +20,7 @@
                     <th class="text-white text-center" style="width: 175px;" scope="col">AZIONI</th>
                 </tr>
             </thead>
-            @endif
+
             <tbody>
                 @forelse ($projects as $project)
                     <tr>
@@ -43,7 +43,9 @@
                         </td>
                     </tr>
                 @empty
+
                     <h2>Nesun risultato</h2>
+
                 @endforelse
 
             </tbody>

@@ -17,7 +17,7 @@ class ProjectsTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         
-        for ($i=0; $i < 10; $i++) {
+        for ($i=0; $i < 100; $i++) {
 
             $new_item = new Project();
 
