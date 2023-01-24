@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\ProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -34,8 +35,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $technologies = Technology::all();
         $types = Type::all();
-        return view('Admin.projects.create', compact('types'));
+        return view('Admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -69,6 +71,12 @@ class ProjectController extends Controller
 
         $new_item = Project::create($data);
 
+        
+        if(array_key_exists('technologies',$data)){
+            $new_item->technologies()->attach($data['technologies']);
+        }
+        
+        // dd($data['technology']);
         return redirect(route('admin.projects.index',$new_item));
     }
 
@@ -80,7 +88,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+        $technologies = Technology::all();
+        return view('admin.projects.show', compact('project', 'technologies'));
     }
 
     /**
@@ -92,7 +101,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -123,6 +133,13 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
+
+        if(array_key_exists('technologies', $data)){
+            $project->tags()->sync($data['technologies']);
+        }else{
+          //  $post->tags()->sync([]); // passando un array vuoto a sync si ottine lo stesso risultato di detach
+          $project->tags()->detach(); // elimina tutte le relazioni
+        }
     
         return redirect(route('admin.projects.show', $project));
     }

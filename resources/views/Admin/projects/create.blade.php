@@ -65,7 +65,20 @@
     
             </div>
 
-
+            <div class="mb-3">
+                <p for="date" class="form-label">Tecnologie</p>
+                @foreach ($technologies as $technology )
+                    <input type="checkbox"
+                    id="technologies{{$loop->iteration}}"
+                    name="technologies[]"
+                    value="{{$technology->id}}"
+                    @if (in_array($technology->id, old('technologies',[])))
+                        checked
+                    @endif>
+                    <label class="me-3" for="technologies{{$loop->iteration}}">{{$technology->type}}</label>
+                @endforeach
+    
+            </div>
 
             <div class="mb-3">
                 <label for="cover_image" class="form-label">Image project *</label>

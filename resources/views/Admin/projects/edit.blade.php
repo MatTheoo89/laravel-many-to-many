@@ -63,6 +63,27 @@
                     </select>
         
                 </div>
+
+                <div class="mb-3">
+                    <p for="date" class="form-label">tag</p>
+                    @foreach ($technologies as $technology )
+                        <input type="checkbox"
+                        id="technology{{$loop->iteration}}"
+                        name="technologies[]"
+                        value="{{$technology->id}}"
+        
+                        @if (!$errors->all() && $project->technologies->contains($technology))
+                            checked
+                        @elseif ($errors->all() && in_array($technology->id, old('technologies',[])))
+                            checked
+                        @endif
+        
+                        >
+                        <label class="me-3" for="technology{{$loop->iteration}}">{{$technology->type}}</label>
+                    @endforeach
+        
+                </div>
+
                 <div class="mb-3">
                     <label for="cover_image" class="form-label">Image project *</label>
                     <input  type="file"

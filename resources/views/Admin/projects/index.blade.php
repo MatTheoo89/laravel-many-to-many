@@ -38,7 +38,7 @@
                         </td>
                         <td class="text-white">
                             @forelse ($project->technologies as $technolgy)
-                                <span class="badge text-bg-warning">{{$project->type->type}}</span>
+                                <span class="badge text-bg-warning">{{$technolgy->type}}</span>
                             @empty
                                 - no data -
                             @endforelse

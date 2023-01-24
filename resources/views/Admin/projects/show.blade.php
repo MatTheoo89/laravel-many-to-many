@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container text-center">
+<div class="container text-center my-5">
     <div class="row">
-        <h1>show Project</h1>
+        <h1 class="my-4">show Project</h1>
 
     <div class="col-4 offset-4">
     <div class="card">
@@ -12,7 +12,19 @@
         </div>
         <div class="card-body">
             <h5 class="card-title text-black">{{$project->name}}</h5>
-            <h6 class="card-title text-black">Tipologia: <span class="badge text-white text-bg-info">{{$project->type?->type}}</span></h6>
+            
+            @if ($project->type)
+                <h6 class="card-title text-black">Tipologia: <span class="badge text-white text-bg-info">{{$project->type?->type}}</span></h6>
+            @endif
+            
+            @if ($project->technologies)
+            <h6 class="card-title text-black">Tecnologia:
+                @foreach ($project->technologies as $technology)
+                    <span class="badge text-white text-bg-success">{{$technology->type}}</span>
+                @endforeach
+            </h6>
+            @endif
+            
             <p class="card-text text-black">{{$project->client_name}}</p>
             <p class="card-text text-black">{{$project->summary}}</p>
             
