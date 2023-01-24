@@ -135,10 +135,10 @@ class ProjectController extends Controller
         $project->update($data);
 
         if(array_key_exists('technologies', $data)){
-            $project->tags()->sync($data['technologies']);
+            $project->technologies()->sync($data['technologies']);
         }else{
           //  $post->tags()->sync([]); // passando un array vuoto a sync si ottine lo stesso risultato di detach
-          $project->tags()->detach(); // elimina tutte le relazioni
+          $project->technologies()->detach(); // elimina tutte le relazioni
         }
     
         return redirect(route('admin.projects.show', $project));
