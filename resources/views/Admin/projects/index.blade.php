@@ -16,6 +16,7 @@
                     <th class="text-white text-center" scope="col">image</th>
                     <th class="text-white text-center" scope="col">Name project</th>
                     <th class="text-white text-center" scope="col">Type</th>
+                    <th class="text-white text-center" scope="col">Tecnologia</th>
                     <th class="text-white text-center" scope="col">summary</th>
                     <th class="text-white text-center" style="width: 175px;" scope="col">AZIONI</th>
                 </tr>
@@ -34,6 +35,14 @@
 
                         <td class="text-white">
                             <span class="badge text-bg-info">{{$project->type?->type}}</span>
+                        </td>
+                        <td class="text-white">
+                            @forelse ($project->technologies as $technolgy)
+                                <span class="badge text-bg-warning">{{$project->type->type}}</span>
+                            @empty
+                                - no data -
+                            @endforelse
+
                         </td>
                         <td class="text-white"> {{$project->summary}}</td>
                         <td class="text-white text-center" style="width: 175px;">
